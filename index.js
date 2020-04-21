@@ -117,6 +117,11 @@ Cookies.prototype.set = function(name, value, opts) {
   return this
 };
 
+Cookies.prototype.remove = function(name, options) {
+  var opts = Object.assign({}, 'object' === typeof options ? options : {}, {maxAge:0})
+  return this.set(name, null, opts)
+};
+
 function Cookie(name, value, attrs) {
   if (!fieldContentRegExp.test(name)) {
     throw new TypeError('argument name is invalid');
