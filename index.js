@@ -65,11 +65,12 @@ Cookies.prototype.get = function(name, opts) {
   value = match[1]
   if (!opts || !signed) return value
 
+  if (!this.keys) throw new Error('.keys required for signed cookies')
+
   remote = this.get(sigName)
   if (!remote) return
 
   data = name + "=" + value
-  if (!this.keys) throw new Error('.keys required for signed cookies');
   index = this.keys.index(data, remote)
 
   if (index < 0) {
